@@ -1,19 +1,38 @@
-service: serverless-example
-
-plugins:
-  - serverless-offline
+service: cart-service
+frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
+  region: eu-west-1
+  profile: aws_bolotov
+  stage: dev
+
+useDotenv: true
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-prune-versions
+
+custom:
+  prune:
+    automatic: true
+
+package:
+  exclude:
+    - ./**
+  include:
+    - dist/**
+    - node_modules/**
 
 functions:
   main:
     handler: dist/main.handler
     events:
       - http:
-          method: ANY
           path: /
-      - http:
           method: ANY
+      - http:
           path: '{proxy+}'
+          method: ANY
