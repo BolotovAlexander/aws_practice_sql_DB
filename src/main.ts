@@ -2,11 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import serverlessExpress from '@vendia/serverless-express';
 import { Callback, Context, Handler } from 'aws-lambda';
 import { AppModule } from './app.module';
+import { json, text } from 'express';
 
 let server: Handler;
 
 async function bootstrap(): Promise<Handler> {
   const app = await NestFactory.create(AppModule);
+  app.use(text());
+  app.use(json({ limit: '10mb' }));
   await app.init();
 
   const expressApp = app.getHttpAdapter().getInstance();
