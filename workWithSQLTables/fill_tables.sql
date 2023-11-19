@@ -13,3 +13,6 @@ UNION ALL
 SELECT id, 'a8b0ab34-2af1-4d77-b546-579b09d3ae5f'::uuid, 2 FROM inserted_cart_id
 UNION ALL
 SELECT id, '6f3196f9-0528-43a0-8177-b54988a2b338'::uuid, 3 FROM inserted_cart_id;
+
+-- INSERT INTO orders (user_id, cart_id, payment, delivery, comments, status, total) VALUES 
+-- ('9117a11e-068d-49a9-82aa-69209b0088bd', '8d02436a-41fe-4424-bd6d-9eb342068e76', 'payment', 'delivery', 'comments', 'ORDERED', 6);

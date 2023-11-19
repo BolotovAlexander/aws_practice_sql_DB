@@ -23,3 +23,15 @@ create TABLE IF NOT EXISTS cart_items (
     FOREIGN KEY (cart_id) REFERENCES carts(id)
     ON DELETE CASCADE ON UPDATE CASCADE
 )
+
+create TABLE IF NOT EXISTS orders (
+	id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL,
+    cart_id UUID,
+    payment JSON,
+    delivery JSON,
+    comments TEXT,
+    status TEXT,
+    total INTEGER,
+    FOREIGN KEY (cart_id) REFERENCES carts(id)
+);
